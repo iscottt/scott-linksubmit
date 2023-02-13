@@ -11,7 +11,8 @@
       <div class="action-container mb-10">
         <NButton :disabled="checkRows < 1" type="primary" @click="batchPush">批量推送</NButton>
       </div>
-      <dataTable :bordered="true" :row-key="rowKey" :columns="columns" :data="tableData" :pagination="pagination" :remote="true" @update:checked-row-keys="handleCheck" />
+      <dataTable :bordered="true" :row-key="rowKey" :columns="columns" :data="tableData" :pagination="pagination"
+        :remote="true" @update:checked-row-keys="handleCheck" />
     </div>
 
     <n-modal mask-closable v-model:show="showModal" style="width: 500px">
@@ -242,12 +243,15 @@ export default {
       $fullLoading.start('正在推送...')
       this.$axios({
         method: 'post',
-        url: 'https://api.scott-studio.cn/api/baidu-push',
+        // url: 'https://api.scott-studio.cn/api/baidu-push',
+        url: "http://localhost:7345/api/baidu-push",
         data: params,
       })
         .then((res) => {
           if (res.data.success) {
             this.updatePostMeta(row)
+          } else {
+            $message.warning(`推送失败：${res.data.message}`)
           }
         })
         .catch((error) => {
@@ -335,17 +339,20 @@ export default {
   min-width: 400px;
   border-radius: 10px;
 }
+
 .nv-admin-page {
   padding: 0 15px;
   display: flex;
   flex-direction: column;
   min-height: var(--fullvh);
 }
+
 @media (max-width: 991.5px) {
   .nv-admin-page {
     min-height: calc(var(--fullvh) - 50px);
   }
 }
+
 .nv-admin-page .page-title {
   font-size: 24px;
   color: var(--gray-2);
@@ -355,20 +362,24 @@ export default {
   align-items: center;
   justify-content: space-between;
 }
+
 @media (max-width: 991.5px) {
   .nv-admin-page .page-title {
     font-size: 22px;
     line-height: 50px;
   }
 }
+
 @media (min-width: 991.5px) {
   .nv-admin-page .page-title {
     padding: 0 10px;
   }
 }
-.nv-admin-page .page-title > span {
+
+.nv-admin-page .page-title>span {
   margin-right: 8px;
 }
+
 .nv-admin-page .page-title button.top-circle {
   position: relative;
   width: 30px;
@@ -384,11 +395,13 @@ export default {
   border: 0;
   transition: cubic-bezier(0.5, 2.5, 0.8, 1) 0.5s;
 }
+
 @media (max-width: 991.5px) {
   .nv-admin-page .page-title button.top-circle {
     display: none;
   }
 }
+
 .nv-admin-page .page-title button.top-circle:hover {
   transform: scale(1.2);
   box-shadow: 8px 8px 8px var(--primary-opacity-4), 0 0 transparent, 0 0 0 transparent;
@@ -400,6 +413,7 @@ export default {
   padding: 32px;
   border-radius: 16px;
 }
+
 @media (max-width: 991.5px) {
   .nv-admin-page .page-content {
     padding: 15px;
@@ -408,20 +422,25 @@ export default {
     box-shadow: 0 1px var(--gray-7), 0 -1px var(--gray-7);
   }
 }
+
 .nv-admin-page .page-content:last-child {
   margin-bottom: 20px;
 }
+
 .nv-admin-page .page-content.is-full {
   border-radius: 8px 8px 0 0;
   margin-bottom: 0;
 }
+
 .is-dark .nv-admin-page .page-content {
   box-shadow: 3px 3px 12px var(--gray-opacity-3), 0 0 0 1px #ffffff08 inset;
 }
+
 .is-dark .page-title button.top-circle {
   background: radial-gradient(at 6px 6px, var(--secondary-color), var(--primary-color-pressed));
   box-shadow: 10px 10px 10px #000, 0 0 0 1px #fff3 inset;
 }
+
 .is-dark .page-title button.top-circle:hover {
   box-shadow: 10px 10px 10px #000, 0 0 0 1px #fff3 inset;
 }
