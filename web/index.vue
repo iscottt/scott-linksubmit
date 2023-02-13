@@ -242,7 +242,7 @@ export default {
       $fullLoading.start('正在推送...')
       this.$axios({
         method: 'post',
-        url: 'http://scott-studio.cn:7345/api/baidu-push',
+        url: 'https://api.scott-studio.cn/api/baidu-push',
         data: params,
       })
         .then((res) => {
