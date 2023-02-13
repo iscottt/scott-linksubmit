@@ -243,8 +243,7 @@ export default {
       $fullLoading.start('正在推送...')
       this.$axios({
         method: 'post',
-        // url: 'https://api.scott-studio.cn/api/baidu-push',
-        url: "http://localhost:7345/api/baidu-push",
+        url: 'https://api.scott-studio.cn/api/baidu-push',
         data: params,
       })
         .then((res) => {

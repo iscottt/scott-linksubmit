@@ -23,7 +23,6 @@ add_action('init_express', () => {
           type: 'Select',
           meta_key: 'is_pushed',
           config: {
-            disabled: true,
             options: [
               { label: '是', value: 1 },
               { label: '否', value: 2 },
