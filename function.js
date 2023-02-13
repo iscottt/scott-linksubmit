@@ -2,15 +2,16 @@ var path = require('path')
 add_action('init_express', () => {
   // 为聊天室注册一个前台访问页面文件夹
   register_static_url('/scott', path.join(__dirname, './web/'))
-  add_submenu_page({
-    parent_slug: 'plugins',
-    page_title: 'scott-push插件设置',
-    menu_title: 'scott-push插件设置',
-    menu_slug: 'scott-push',
+
+  add_menu_page({
+    page_title: '提交网站收录',
+    menu_title: '提交网站收录',
+    menu_slug: 'scott-linksubmit',
     power: 10,
     position: 9,
+    icon: '<i class="el-icon-cpu"></i>',
     component_url: '/scott/index.vue',
-  })
+  });
 
   add_meta_box({
     post_types: ['article'],
